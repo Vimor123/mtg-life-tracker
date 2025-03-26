@@ -2,4 +2,6 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="player1">#FF8fe1a7</color>
+    <color name="player2">#FFe18fb3</color>
 </resources>
