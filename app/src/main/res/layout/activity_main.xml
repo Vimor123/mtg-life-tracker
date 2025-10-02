@@ -7,6 +7,17 @@
     android:background="@color/black"
     tools:context=".MainActivity">
 
+    <ImageButton
+        android:id="@+id/resetButton"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:background="@drawable/refresh"
+        android:scaleType="fitCenter"
+        android:layout_marginLeft="2dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/player2LayoutTransparent"
         android:layout_width="match_parent"
@@ -23,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/player2_layout_background"
-            android:layout_marginBottom="6dp"
+            android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -54,10 +65,10 @@
                 android:textSize="60dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.8"
+                app:layout_constraintHorizontal_bias="0.85"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.2" />
+                app:layout_constraintVertical_bias="0.15" />
 
             <Button
                 android:id="@+id/player2LifeUpButton"
@@ -103,7 +114,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/player1_layout_background"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -132,10 +143,10 @@
                 android:textSize="60dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.8"
+                app:layout_constraintHorizontal_bias="0.85"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.8" />
+                app:layout_constraintVertical_bias="0.85" />
 
             <Button
                 android:id="@+id/player1LifeUpButton"

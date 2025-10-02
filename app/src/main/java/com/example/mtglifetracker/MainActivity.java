@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.Timer;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     Button player1LifeDownButton;
     Button player2LifeUpButton;
     Button player2LifeDownButton;
+    ImageButton resetButton;
     int player1Delta;
     int player2Delta;
     Timer player1Timer;
@@ -126,6 +128,18 @@ public class MainActivity extends AppCompatActivity {
             player2LifeDeltaTextView.setText(getDeltaString(player2Delta));
             startPlayer2Timer();
             player2Time = 0.0;
+        });
+
+        resetButton = findViewById(R.id.resetButton);
+        resetButton.setOnClickListener(view -> {
+            player1Life = 20;
+            player2Life = 20;
+            player1LifeTextView.setText(Integer.toString(player1Life));
+            player2LifeTextView.setText(Integer.toString(player2Life));
+            player1Delta = 0;
+            player2Delta = 0;
+            player1LifeDeltaTextView.setText("");
+            player2LifeDeltaTextView.setText("");
         });
 
         player1LifeTextView.setText(Integer.toString(player1Life));
