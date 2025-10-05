@@ -2,6 +2,7 @@ package com.example.mtglifetracker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     Button player2LifeUpButton;
     Button player2LifeDownButton;
     ImageButton resetButton;
+    ImageButton settingsButton;
     int player1Delta;
     int player2Delta;
     Timer player1Timer;
@@ -142,6 +144,11 @@ public class MainActivity extends AppCompatActivity {
             player2LifeDeltaTextView.setText("");
         });
 
+        settingsButton = findViewById(R.id.settingsButton);
+        settingsButton.setOnClickListener(view -> {
+            launchSettings(view);
+        });
+
         player1LifeTextView.setText(Integer.toString(player1Life));
         player2LifeTextView.setText(Integer.toString(player2Life));
         player1LifeDeltaTextView.setText("");
@@ -192,5 +199,10 @@ public class MainActivity extends AppCompatActivity {
         };
         player2Timer = new Timer();
         player2Timer.scheduleAtFixedRate(player2TimerTask, 0, 500);
+    }
+
+    public void launchSettings(View view) {
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
     }
 }
