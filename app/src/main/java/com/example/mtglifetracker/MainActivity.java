@@ -1,8 +1,15 @@
 package com.example.mtglifetracker;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +24,11 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
+    SharedPreferences sharedPreferences;
+    ConstraintLayout player1ConstraintLayout;
+    ConstraintLayout player2ConstraintLayout;
+    String player1ColorString;
+    String player2ColorString;
     int player1Life;
     int player2Life;
     TextView player1LifeTextView;
@@ -52,6 +64,11 @@ public class MainActivity extends AppCompatActivity {
         getWindow().getDecorView().setSystemUiVisibility(flags);
 
         setContentView(R.layout.activity_main);
+
+        sharedPreferences = getSharedPreferences("MyUserPrefs", Context.MODE_PRIVATE);
+        player1ColorString = sharedPreferences.getString("player1Color", "#f7d79d");
+        player2ColorString = sharedPreferences.getString("player2Color", "#be9df7");
+        setColors(player1ColorString, player2ColorString);
 
         player1Life = 20;
         player2Life = 20;
@@ -204,5 +221,25 @@ public class MainActivity extends AppCompatActivity {
     public void launchSettings(View view) {
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
+    }
+
+    public void setColors(String newPlayer1ColorString, String newPlayer2ColorString) {
+        player1ColorString = newPlayer1ColorString;
+        player2ColorString = newPlayer2ColorString;
+
+        player1ConstraintLayout = findViewById(R.id.player1Layout);
+        player2ConstraintLayout = findViewById(R.id.player2Layout);
+
+        player1ConstraintLayout.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(player1ColorString)));
+        player2ConstraintLayout.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(player2ColorString)));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sharedPreferences = getSharedPreferences("MyUserPrefs", Context.MODE_PRIVATE);
+        player1ColorString = sharedPreferences.getString("player1Color", "#f7d79d");
+        player2ColorString = sharedPreferences.getString("player2Color", "#be9df7");
+        setColors(player1ColorString, player2ColorString);
     }
 }
