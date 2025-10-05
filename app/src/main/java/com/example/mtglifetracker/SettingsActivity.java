@@ -55,6 +55,9 @@ public class SettingsActivity extends AppCompatActivity {
         player1EditText = findViewById(R.id.player1ColorTextInput);
         player2EditText = findViewById(R.id.player2ColorTextInput);
 
+        player1EditText.setText(player1ColorString.substring(1));
+        player2EditText.setText(player2ColorString.substring(1));
+
         player1Hashtag = findViewById(R.id.player1HashtagTextView);
         player2Hashtag = findViewById(R.id.player2HashtagTextView);
 
@@ -114,12 +117,6 @@ public class SettingsActivity extends AppCompatActivity {
 
         player1ConstraintLayout.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(player1ColorString)));
         player2ConstraintLayout.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(player2ColorString)));
-
-        player1EditText = findViewById(R.id.player1ColorTextInput);
-        player2EditText = findViewById(R.id.player2ColorTextInput);
-
-        player1EditText.setText(player1ColorString.substring(1));
-        player2EditText.setText(player2ColorString.substring(1));
 
         player1Button = findViewById(R.id.player1ColorButton);
         player2Button = findViewById(R.id.player2ColorButton);
