@@ -1,9 +1,7 @@
 package com.example.mtglifetracker;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,10 +9,7 @@ import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -232,6 +227,28 @@ public class MainActivity extends AppCompatActivity {
 
         player1ConstraintLayout.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(player1ColorString)));
         player2ConstraintLayout.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(player2ColorString)));
+
+        player1LifeTextView = findViewById(R.id.player1LifeTextView);
+        player2LifeTextView = findViewById(R.id.player2LifeTextView);
+
+        player1LifeDeltaTextView = findViewById(R.id.player1LifeDeltaTextView);
+        player2LifeDeltaTextView = findViewById(R.id.player2LifeDeltaTextView);
+
+        if (ColorMethods.isFontBlackForBackground(newPlayer1ColorString)) {
+            player1LifeTextView.setTextColor(Color.parseColor("#000000"));
+            player1LifeDeltaTextView.setTextColor(Color.parseColor("#000000"));
+        } else {
+            player1LifeTextView.setTextColor(Color.parseColor("#ffffff"));
+            player1LifeDeltaTextView.setTextColor(Color.parseColor("#ffffff"));
+        }
+
+        if (ColorMethods.isFontBlackForBackground(newPlayer2ColorString)) {
+            player2LifeTextView.setTextColor(Color.parseColor("#000000"));
+            player2LifeDeltaTextView.setTextColor(Color.parseColor("#000000"));
+        } else {
+            player2LifeTextView.setTextColor(Color.parseColor("#ffffff"));
+            player2LifeDeltaTextView.setTextColor(Color.parseColor("#ffffff"));
+        }
     }
 
     @Override

@@ -5,7 +5,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -22,6 +21,8 @@ public class SettingsActivity extends AppCompatActivity {
     ConstraintLayout player2ConstraintLayout;
     String player1ColorString;
     String player2ColorString;
+    TextView player1ColorTextView;
+    TextView player2ColorTextView;
     TextView player1Hashtag;
     TextView player2Hashtag;
     EditText player1EditText;
@@ -64,20 +65,17 @@ public class SettingsActivity extends AppCompatActivity {
         defaultsButton = findViewById(R.id.defaultsButton);
         defaultsButton.setOnClickListener(view -> {
             setColors("#f7d79d", "#be9df7");
-            player1EditText.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
-            player1Hashtag.setTextColor(Color.parseColor("#000000"));
-            player2EditText.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
-            player2Hashtag.setTextColor(Color.parseColor("#000000"));
+            player1EditText.setText("f7d79d");
+            player2EditText.setText("be9df7");
         });
 
         player1Button = findViewById(R.id.player1ColorButton);
         player1Button.setOnClickListener(view -> {
             String newPlayer1ColorString = "#" + player1EditText.getText().toString();
-            if (checkIfColorStringValid(newPlayer1ColorString)) {
+            if (ColorMethods.checkIfColorStringValid(newPlayer1ColorString)) {
                 setColors(newPlayer1ColorString, player2ColorString);
-                player1EditText.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
-                player1Hashtag.setTextColor(Color.parseColor("#000000"));
             } else {
+                player1EditText.setTextColor(Color.parseColor("#ff0000"));
                 player1EditText.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#ff0000")));
                 player1Hashtag.setTextColor(Color.parseColor("#ff0000"));
             }
@@ -86,11 +84,10 @@ public class SettingsActivity extends AppCompatActivity {
         player2Button = findViewById(R.id.player2ColorButton);
         player2Button.setOnClickListener(view -> {
             String newPlayer2ColorString = "#" + player2EditText.getText().toString();
-            if (checkIfColorStringValid(newPlayer2ColorString)) {
+            if (ColorMethods.checkIfColorStringValid(newPlayer2ColorString)) {
                 setColors(player1ColorString, newPlayer2ColorString);
-                player2EditText.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
-                player2Hashtag.setTextColor(Color.parseColor("#000000"));
             } else {
+                player2EditText.setTextColor(Color.parseColor("#ff0000"));
                 player2EditText.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#ff0000")));
                 player2Hashtag.setTextColor(Color.parseColor("#ff0000"));
             }
@@ -112,29 +109,53 @@ public class SettingsActivity extends AppCompatActivity {
         editor.putString("player2Color", player2ColorString);
         editor.commit();
 
+        player1ColorTextView = findViewById(R.id.player1ColorTextView);
+        player2ColorTextView = findViewById(R.id.player2ColorTextView);
+
+        player1Hashtag = findViewById(R.id.player1HashtagTextView);
+        player2Hashtag = findViewById(R.id.player2HashtagTextView);
+
         player1ConstraintLayout = findViewById(R.id.player1LayoutColor);
         player2ConstraintLayout = findViewById(R.id.player2LayoutColor);
 
-        player1ConstraintLayout.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(player1ColorString)));
-        player2ConstraintLayout.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(player2ColorString)));
+        player1EditText = findViewById(R.id.player1ColorTextInput);
+        player2EditText = findViewById(R.id.player2ColorTextInput);
 
         player1Button = findViewById(R.id.player1ColorButton);
         player2Button = findViewById(R.id.player2ColorButton);
 
+        player1ConstraintLayout.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(player1ColorString)));
+        player2ConstraintLayout.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(player2ColorString)));
+
         player1Button.setTextColor(Color.parseColor(player1ColorString));
         player2Button.setTextColor(Color.parseColor(player2ColorString));
-    }
 
-    private boolean checkIfColorStringValid(String colorString) {
-        if (colorString.length() != 7 || colorString.charAt(0) != '#') {
-            return false;
+        if (ColorMethods.isFontBlackForBackground(player1ColorString)) {
+            player1ColorTextView.setTextColor(Color.parseColor("#000000"));
+            player1Hashtag.setTextColor(Color.parseColor("#000000"));
+            player1EditText.setTextColor(Color.parseColor("#000000"));
+            player1EditText.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
+            player1Button.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
+        } else {
+            player1ColorTextView.setTextColor(Color.parseColor("#ffffff"));
+            player1Hashtag.setTextColor(Color.parseColor("#ffffff"));
+            player1EditText.setTextColor(Color.parseColor("#ffffff"));
+            player1EditText.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#ffffff")));
+            player1Button.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#ffffff")));
         }
-        for (int i = 1; i <= 6; i++) {
-            char c = colorString.charAt(i);
-            if (!((c >= '0' && c <= '9') || (c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'F'))) {
-                return false;
-            }
+
+        if (ColorMethods.isFontBlackForBackground(player2ColorString)) {
+            player2ColorTextView.setTextColor(Color.parseColor("#000000"));
+            player2Hashtag.setTextColor(Color.parseColor("#000000"));
+            player2EditText.setTextColor(Color.parseColor("#000000"));
+            player2EditText.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
+            player2Button.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
+        } else {
+            player2ColorTextView.setTextColor(Color.parseColor("#ffffff"));
+            player2Hashtag.setTextColor(Color.parseColor("#ffffff"));
+            player2EditText.setTextColor(Color.parseColor("#ffffff"));
+            player2EditText.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#ffffff")));
+            player2Button.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#ffffff")));
         }
-        return true;
     }
 }
